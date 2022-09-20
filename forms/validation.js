@@ -24,6 +24,21 @@
 
      let typeError=false;
 
+     let isFormvalid=false;
+
+
+
+     function clearform(){
+
+         document.getElementById("name").value=" "
+         document.getElementById("email").value=" "
+         document.getElementById("subject").value=" "
+         document.getElementById("message").value=" "
+         document.getElementById("phone").value=" "
+     }
+
+  
+
       function resetElement(elm){
 
         elm.nextElementSibling.classList.remove("hidden")
@@ -40,6 +55,8 @@
 
     function validate() { 
 
+      let isFormvalid=true;
+
         if(!typeError) {return;}
 
 
@@ -53,9 +70,10 @@
 
         invalidElement(phoneInput)
 
-        if(!nameInput.value ||nameInput.value.length < 3 || nameInput.value.length > 22){
+        if(!nameInput.value ||nameInput.value.trim()==""||nameInput.value.length < 3 || nameInput.value.length > 22){
 
             resetElement(nameInput);
+            let isFormvalid=false;
 
  
         }
@@ -63,6 +81,7 @@
         if(!isValidEmail(emailInput.value) ) {
 
             resetElement(emailInput);
+            let isFormvalid=false;
 
        }
 
@@ -70,20 +89,23 @@
        if(!isValidPhone(phoneInput.value) ) {
 
         resetElement(phoneInput);
+        let isFormvalid=false;
 
    }
 
        if(!subjectInput.value){
 
         resetElement(subjectInput);
+        let isFormvalid=false;
 
    }
 
-      if(!messageInput.value){
+  //     if(!messageInput.value){
 
-      resetElement(messageInput);
+  //     resetElement(messageInput);
+  //     let isFormvalid=false;
 
-  }
+  // }
 
        
     }
@@ -94,6 +116,11 @@
         typeError=true;
         e.preventDefault();
         validate();
+
+        if(isFormvalid==true){
+
+          clearform();
+        }
         
     })
 
@@ -116,11 +143,11 @@
         
     })
 
-    messageInput.addEventListener("input",function(){
+    // messageInput.addEventListener("input",function(){
 
-        validate();
+    //     validate();
         
-    })
+    // })
 
     phoneInput.addEventListener("input",function(){
 
