@@ -16,7 +16,6 @@
     const nameInput=document.getElementById("name");
     const emailInput=document.getElementById("email");
     const subjectInput=document.getElementById("subject");
-    const messageInput=document.getElementById("message");
     const phoneInput=document.getElementById("phone");
 
    
@@ -30,11 +29,10 @@
 
      function clearform(){
 
-         document.getElementById("name").value=" "
-         document.getElementById("email").value=" "
-         document.getElementById("subject").value=" "
-         document.getElementById("message").value=" "
-         document.getElementById("phone").value=" "
+         document.getElementById("name").value=""
+         document.getElementById("email").value=""
+         document.getElementById("subject").value=""
+         document.getElementById("phone").value=""
      }
 
   
@@ -55,7 +53,7 @@
 
     function validate() { 
 
-      let isFormvalid=true;
+       isFormvalid=true;
 
         if(!typeError) {return;}
 
@@ -66,14 +64,12 @@
 
         invalidElement(subjectInput)
 
-        invalidElement(messageInput)
-
         invalidElement(phoneInput)
 
         if(!nameInput.value ||nameInput.value.trim()==""||nameInput.value.length < 3 || nameInput.value.length > 22){
 
             resetElement(nameInput);
-            let isFormvalid=false;
+             isFormvalid=false;
 
  
         }
@@ -81,7 +77,7 @@
         if(!isValidEmail(emailInput.value) ) {
 
             resetElement(emailInput);
-            let isFormvalid=false;
+           isFormvalid=false;
 
        }
 
@@ -89,37 +85,35 @@
        if(!isValidPhone(phoneInput.value) ) {
 
         resetElement(phoneInput);
-        let isFormvalid=false;
+         isFormvalid=false;
 
    }
 
-       if(!subjectInput.value){
+       if(!subjectInput.value ||subjectInput.value.trim()==""){
 
         resetElement(subjectInput);
-        let isFormvalid=false;
+         isFormvalid=false;
 
    }
 
-  //     if(!messageInput.value){
-
-  //     resetElement(messageInput);
-  //     let isFormvalid=false;
-
-  // }
+     
 
        
     }
 
     form.addEventListener("submit",(e)=>{
 
-
+      e.preventDefault();
         typeError=true;
-        e.preventDefault();
+       
         validate();
 
         if(isFormvalid==true){
+              
+          alert('form submitted');
 
           clearform();
+          
         }
         
     })
@@ -143,11 +137,6 @@
         
     })
 
-    // messageInput.addEventListener("input",function(){
-
-    //     validate();
-        
-    // })
 
     phoneInput.addEventListener("input",function(){
 
